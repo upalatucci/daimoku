@@ -1,9 +1,10 @@
 import { Metadata } from "next"
-import { Button } from "components/Button/Button"
-import { LP_GRID_ITEMS } from "lp-items"
+import Image from "next/image"
+import AddDaimoku from "components/Modals/AddDaimoku"
+import Flower from '../flower.png'
 
 export const metadata: Metadata = {
-  title: "Next.js Enterprise Boilerplate",
+  title: "Daimoku Corso Donne",
   twitter: {
     card: "summary_large_image",
   },
@@ -25,38 +26,33 @@ export default function Web() {
       <section className="bg-white dark:bg-gray-900">
         <div className="mx-auto grid max-w-screen-xl px-4 py-8 text-center lg:py-16">
           <div className="mx-auto place-self-center">
-            <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight dark:text-white md:text-5xl xl:text-6xl">
-              Next.js Enterprise Boilerplate
+            <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl from-magenta to-[#ac2aed] bg-gradient-to-r inline-block text-transparent bg-clip-text ">
+              Daimoku per il corso Donne
             </h1>
             <p className="mb-6 max-w-2xl font-light text-gray-500 dark:text-gray-400 md:text-lg lg:mb-8 lg:text-xl">
-              Jumpstart your enterprise project with our feature-packed, high-performance Next.js boilerplate!
-              Experience rapid UI development, AI-powered code reviews, and an extensive suite of tools for a smooth and
-              enjoyable development process.
+              24 e 25 febbraio il territorio Salerno ospitera&apos; il corso <strong className="font-bold">Donne Sud Italia</strong>
             </p>
-            <Button href="https://github.com/Blazity/next-enterprise" className="mr-3">
-              Get started
-            </Button>
-            <Button
-              href="https://vercel.com/new/git/external?repository-url=https://github.com/Blazity/next-enterprise"
-              intent="secondary"
-            >
-              Deploy Now
-            </Button>
+            <div>
+              <h2 className="font-bold text-4xl md:text-5xl xl:text-6xl my-10 from-magenta to-[#ac2aed] bg-gradient-to-r inline-block text-transparent bg-clip-text"> 1 000 000 Daimoku</h2>
+            </div>
+
+            <AddDaimoku />
+
           </div>
         </div>
       </section>
       <section className="bg-white dark:bg-gray-900">
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
-          <div className="justify-center space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
-            {LP_GRID_ITEMS.map((singleItem) => (
-              <div key={singleItem.title} className="flex flex-col items-center justify-center text-center">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 p-1.5 text-blue-700 dark:bg-primary-900 lg:h-12 lg:w-12">
-                  {singleItem.icon}
-                </div>
-                <h3 className="mb-2 text-xl font-bold dark:text-white">{singleItem.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400">{singleItem.description}</p>
-              </div>
-            ))}
+     
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6 flex items-center justify-center"> <Image src="/flower.png" width={40} height={40} alt="1000 daimoku"/> <span className="font-bold ml-2">= 1000 Daimoku</span> <span className="mx-2">= 10 min</span></div>
+        <div className="mx-auto max-w-screen-xl px-4 sm:py-16 lg:px-6">
+          <div className="flex flex-wrap-reverse flex-row-reverse">
+              {new Array(400).fill(0).map((_, index) => (<Image src="/flower.png" key={index} width={40} height={40} alt="1000 daimoku"/>))}
+
+              <Image src="/flower.png" width={40} height={40} alt="1000 daimoku" className="animate-[daimoku_1s_ease-out]" style={{animationDelay: '150ms'}}/>
+
+              <Image src="/flower.png" width={40} height={40} alt="1000 daimoku" className="animate-[daimoku_1s_ease-out]" style={{animationDelay: '250ms'}}/>
+              <Image src="/flower.png" width={40} height={40} alt="1000 daimoku" className="animate-[daimoku_1s_ease-out]" style={{animationDelay: '350ms'}}/>
+
           </div>
         </div>
       </section>
