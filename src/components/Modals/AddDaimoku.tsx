@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { Dialog, Transition } from '@headlessui/react';
 import { CalendarDaysIcon, CheckIcon } from '@heroicons/react/24/outline';
@@ -7,12 +7,15 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 const AddDaimoku = () => {
   const [open, setOpen] = useState(false);
   const [done, setDone] = useState(false);
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<Error | null>();
+
+  const [hours, setHours] = useState(1)
+  const [minutes, setMinutes] = useState(0)
 
   const cancelButtonRef = useRef(null);
 
   const onAddDaimoku = () => {
-    fetch('/api/daimoku', { method: 'POST', body: JSON.stringify({daimoku: 10}) })
+    fetch('/api/daimoku', { method: 'POST', headers: {'Content-type': 'application/json'}, body: JSON.stringify({hours, minutes}) })
       .then((response) => response.json())
       .then(() => {
         setDone(true);
@@ -112,10 +115,12 @@ const AddDaimoku = () => {
                                 <div className="mt-2">
                                   <select
                                     id="hour"
-                                    name="country"
-                                    autoComplete="country-name"
+                                    name="hours"
                                     className="bg-white block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                    value={hours}
+                                    onChange={e => setHours(parseInt(e.currentTarget.value))}
                                   >
+                                    <option>0</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -135,9 +140,10 @@ const AddDaimoku = () => {
                                 <div className="mt-2">
                                   <select
                                     id="hour"
-                                    name="country"
-                                    autoComplete="country-name"
+                                    name="minutes"
                                     className="bg-white block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                    value={minutes}
+                                    onChange={e => setMinutes(parseInt(e.currentTarget.value))}
                                   >
                                     {new Array(12)
                                       .fill(0)
@@ -154,10 +160,15 @@ const AddDaimoku = () => {
                           </div>
                         </div>
                       </div>
-                      {error && (<div>
-                        <div>Errore</div>
-                        {error?.message}
-                      </div>)}
+                      {error && (
+                      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-8" role="alert">
+                        <h3 className="font-bold">Errore!</h3>
+                        <span className="block sm:inline">{error?.message}</span>
+                        <span className="absolute inset-y-0 right-0 px-4 py-3" onClick={() => setError(null)}>
+                          <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Chiudi</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                        </span>
+                      </div>
+                    )}
                       <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button
                           type="button"
