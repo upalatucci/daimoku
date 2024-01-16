@@ -22,21 +22,28 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
         });
     }, 2000);
 
-    return () => clearInterval(interval)
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-white">
         <div className="mx-auto grid max-w-screen-xl px-4 py-8 text-center lg:py-16">
           <div className="mx-auto place-self-center">
             <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl from-magenta to-[#ac2aed] bg-gradient-to-r inline-block text-transparent bg-clip-text ">
               Daimoku per il corso Donne
             </h1>
-            <p className="mb-6 max-w-2xl font-light text-gray-500 dark:text-gray-400 md:text-lg lg:mb-8 lg:text-xl">
+            <p className="mx-auto mb-6 max-w-2xl font-light text-gray-600 md:text-lg lg:mb-8 lg:text-xl">
               24 e 25 febbraio il territorio Salerno ospitera&apos; il corso{' '}
               <strong className="font-bold">Donne Sud Italia</strong>
             </p>
+            <em className="text-gray-600">
+              La vera forza motrice del cambiamento sono le preghiere delle donne e le loro attività
+              profondamente radicate nella vita quotidiana. Il potere delle donne può essere
+              paragonato al potere della terra. Quando la terra si muove, ogni cosa si muove. I
+              baluardi del potere crollano e anche le montagne apparentemente inamovibili si
+              spostano. La forza delle donne è illimitata. Nulla può superarla» (NRU, 11, 50).
+            </em>
             <div>
               <h2 className="flex  items-center justify-center gap-2 font-bold text-4xl md:text-5xl xl:text-6xl my-10 from-magenta to-[#ac2aed] bg-gradient-to-r  text-transparent bg-clip-text">
                 <AnimatedNumbers
@@ -58,7 +65,7 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
           </div>
         </div>
       </section>
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-white">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6 flex items-center justify-center">
           <Image src="/flower.png" width={40} height={40} alt="1000 daimoku" />{' '}
           <span className="font-bold ml-2">= 10.000 Daimoku</span>{' '}
@@ -67,9 +74,15 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
         <div className="mx-auto max-w-screen-xl px-4 sm:py-16 lg:px-6">
           <div className="flex flex-wrap-reverse flex-row-reverse">
             {new Array(nFlowers).fill(0).map((_, index) => (
-              <Image src="/flower.png" key={index} width={40} height={40} alt="1000 daimoku" className="animate-[daimoku_1s_ease-out]" />
+              <Image
+                src="/flower.png"
+                key={index}
+                width={40}
+                height={40}
+                alt="1000 daimoku"
+                className="animate-[daimoku_1s_ease-out]"
+              />
             ))}
-
           </div>
         </div>
       </section>
