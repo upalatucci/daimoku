@@ -1,5 +1,6 @@
 import { kv } from '@vercel/kv';
 import { NextApiRequest, NextApiResponse } from 'next';
+export const revalidate = 1000;
 
 export default async function handler(req: NextApiRequest, response: NextApiResponse) {
   if (req.method === 'POST') {
@@ -14,6 +15,7 @@ export default async function handler(req: NextApiRequest, response: NextApiResp
     return response.json({ ok: 'ok' });
   } else {
     const daimoku = await kv.get<number>('daimoku');
+    response.setHeader('Cache-Control', 's-maxage=60');
     return response.json({ status: 'ok', daimoku: daimoku || 0 });
   }
 }
