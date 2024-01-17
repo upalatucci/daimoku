@@ -91,7 +91,7 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
               </h2>
             </div>
 
-            <AddDaimoku />
+            <AddDaimoku setNewDaimoku={setDaimoku} />
           </div>
         </div>
       </section>

@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, response: NextApiResp
 
     const daimoku = (hours * 60 + minutes) * 50;
 
-    await kv.incrby('daimoku', daimoku);
-    return response.json({ ok: 'ok' });
+    const newDaimoku = await kv.incrby('daimoku', daimoku);
+    return response.json({ ok: 'ok', daimoku: newDaimoku });
   } else {
     const daimoku = await kv.get<number>('daimoku');
     response.setHeader('Cache-Control', 's-maxage=60');
