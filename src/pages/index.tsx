@@ -9,6 +9,12 @@ const AnimatedNumbers = dynamic(() => import('react-animated-numbers'), {
   ssr: false,
 });
 
+const getRandomAnimationDuration = () => {
+  const ms = Math.random() * 500 + 500;
+
+  return `${ms}ms`;
+};
+
 const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ initialDaimoku }) => {
   const [daimoku, setDaimoku] = useState(initialDaimoku);
   const nFlowers = Math.round(daimoku / 1_000);
@@ -111,6 +117,7 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
                 height={40}
                 alt="1000 daimoku"
                 className="animate-[daimoku_1s_ease-out]"
+                style={{ animationDuration: getRandomAnimationDuration() }}
               />
             ))}
           </div>
