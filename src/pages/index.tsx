@@ -11,7 +11,7 @@ const AnimatedNumbers = dynamic(() => import('react-animated-numbers'), {
 
 const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ initialDaimoku }) => {
   const [daimoku, setDaimoku] = useState(initialDaimoku);
-  const nFlowers = Math.round(daimoku / 10_000);
+  const nFlowers = Math.round(daimoku / 1_000);
 
   useEffect(() => {
     const interval = setInterval(() => {
