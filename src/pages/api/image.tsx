@@ -51,7 +51,7 @@ export default async function handler() {
         }}
       >
         <h1 style={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-          Daimoku per il corso Donne
+          Daimoku per il corso Donne Nazionale
         </h1>
         <h2
           style={{

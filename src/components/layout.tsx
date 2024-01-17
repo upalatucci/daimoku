@@ -12,10 +12,10 @@ const bitter = Bitter({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
-  const metaTitle = 'Daimoku Corso Donne';
+  const metaTitle = 'Daimoku Corso Donne Nazionale';
 
   const metaDescription =
-    '24 e 25 febbraio il territorio Salerno ospiterá il corso Donne Sud Italia';
+    '24 e 25 febbraio il territorio Salerno ospiterá il corso Donne Nazionale Macroarea Sud Italia';
 
   const imageURL = '/api/image';
   return (

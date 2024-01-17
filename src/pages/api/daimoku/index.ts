@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, response: NextApiResp
     const hours = parseInt(body.hours);
     const minutes = parseInt(body.minutes);
 
-    const daimoku = (hours * 60 + minutes) * 500;
+    const daimoku = (hours * 60 + minutes) * 50;
 
     await kv.incrby('daimoku', daimoku);
     return response.json({ ok: 'ok' });
