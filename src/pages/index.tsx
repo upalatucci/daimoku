@@ -37,30 +37,36 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
               24 e 25 febbraio il territorio Salerno ospitera&apos; il corso{' '}
               <strong className="font-bold">Donne Macroarea Sud Italia</strong>
             </p>
-            <ul className="list-disc list-inside text-left max-w-lg mx-auto my-8 text-gray-600">
-              Obiettivi del Corso
-              <li>100 min di Daimoku al giorno</li>
-              <li>
-                10 dialoghi con 10 persone diverse, impegnandoci in modo che almeno una di queste
-                persone inizi a partecipare alle nostre riunioni
-              </li>
-              <li>
-                <a
-                  href="https://ilnuovorinascimento.org/c/la-nuova-rivoluzione-umana/"
-                  className="underline text-magenta"
-                >
-                  Studio del NRU Vol. 30 Capitolo Il Voto
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://ilnuovorinascimento.org/a/siate-la-colonna-della-fiducia-e-della-speranza-nella-societa/"
-                  className="underline text-magenta"
-                >
-                  Studio delle linee guida per l&apos;Italia
-                </a>
-              </li>
-            </ul>
+            <div className="text-left max-w-lg mx-auto my-8 text-gray-600">
+              <span className="font-bold">Obiettivi del Corso:</span>
+              <ul className="list-disc list-inside pl-2 mt-2">
+                <li>100 min di Daimoku al giorno</li>
+                <li>
+                  10 dialoghi con 10 persone diverse, impegnandoci in modo che almeno una di queste
+                  persone inizi a partecipare alle nostre riunioni
+                </li>
+                <li>
+                  <a
+                    href="https://ilnuovorinascimento.org/c/la-nuova-rivoluzione-umana/"
+                    target="_blank"
+                    className="underline text-magenta"
+                    rel="noreferrer"
+                  >
+                    Studio del NRU Vol. 30 Capitolo Il Voto
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://ilnuovorinascimento.org/a/siate-la-colonna-della-fiducia-e-della-speranza-nella-societa/"
+                    className="underline text-magenta"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Studio delle linee guida per l&apos;Italia
+                  </a>
+                </li>
+              </ul>
+            </div>
             <em className="text-gray-600">
               La vera forza motrice del cambiamento sono le preghiere delle donne e le loro attività
               profondamente radicate nella vita quotidiana. Il potere delle donne può essere
