@@ -20,7 +20,7 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
         .then((response) => {
           if ('daimoku' in (response as any)) setDaimoku((response as any).daimoku);
         });
-    }, 2000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
