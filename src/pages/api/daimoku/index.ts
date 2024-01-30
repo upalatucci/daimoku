@@ -15,7 +15,6 @@ export default async function handler(req: NextApiRequest, response: NextApiResp
     return response.json({ ok: 'ok', daimoku: newDaimoku });
   } else {
     const daimoku = await kv.get<number>('daimoku');
-    response.setHeader('Cache-Control', 's-maxage=60');
     return response.json({ status: 'ok', daimoku: daimoku || 0 });
   }
 }
