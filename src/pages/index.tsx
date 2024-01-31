@@ -2,22 +2,20 @@ import { kv } from '@vercel/kv';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { FC, Suspense, useEffect, useState } from 'react';
+import Flowers from 'src/components/Flowers';
 import AddDaimoku from 'src/components/Modals/AddDaimoku';
+import FlowersIMG from '../assets/flower.png';
 
 const AnimatedNumbers = dynamic(() => import('react-animated-numbers'), {
   ssr: false,
+  loading: () => (
+    <span className="h-12 w-40 animate-pulse rounded-full from-magenta to-[#ac2aed] bg-gradient-to-r" />
+  ),
 });
-
-const getRandomAnimationDuration = () => {
-  const ms = Math.random() * 500 + 500;
-
-  return `${ms}ms`;
-};
 
 const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ initialDaimoku }) => {
   const [daimoku, setDaimoku] = useState(initialDaimoku);
-  const nFlowers = Math.round(daimoku / 1_000);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,17 +80,19 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
             </em>
             <div>
               <h2 className="flex  items-center justify-center gap-2 font-bold text-4xl md:text-5xl xl:text-6xl my-10 from-magenta to-[#ac2aed] bg-gradient-to-r  text-transparent bg-clip-text">
-                <AnimatedNumbers
-                  includeComma
-                  transitions={() => ({
-                    type: 'spring',
-                    duration: 0.5,
-                  })}
-                  animateToNumber={daimoku}
-                  fontStyle={{
-                    color: '#ED1E79',
-                  }}
-                />
+                <Suspense fallback={<>{daimoku}</>}>
+                  <AnimatedNumbers
+                    includeComma
+                    transitions={() => ({
+                      type: 'spring',
+                      duration: 0.5,
+                    })}
+                    animateToNumber={daimoku}
+                    fontStyle={{
+                      color: '#ED1E79',
+                    }}
+                  />
+                </Suspense>
                 Daimoku
               </h2>
             </div>
@@ -103,25 +103,11 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
       </section>
       <section className="bg-white">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6 flex items-center justify-center">
-          <Image src="/flower.png" width={40} height={40} alt="1000 daimoku" />{' '}
+          <Image src={FlowersIMG} width={40} height={40} alt="1000 daimoku" />{' '}
           <span className="font-bold ml-2">= 1.000 Daimoku</span>{' '}
           <span className="mx-2">= 20 min</span>
         </div>
-        <div className="mx-auto max-w-screen-xl px-4 sm:py-16 lg:px-6">
-          <div className="flex flex-wrap-reverse flex-row-reverse">
-            {new Array(nFlowers).fill(0).map((_, index) => (
-              <Image
-                src="/flower.png"
-                key={index}
-                width={40}
-                height={40}
-                alt="1000 daimoku"
-                className="animate-[daimoku_1s_ease-out]"
-                style={{ animationDuration: getRandomAnimationDuration() }}
-              />
-            ))}
-          </div>
-        </div>
+        <Flowers daimoku={daimoku} />
       </section>
     </>
   );
