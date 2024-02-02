@@ -42,7 +42,10 @@ const Flowers: FC<FlowersProps> = ({ daimoku }) => {
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 sm:py-16 lg:px-6">
-      <div className="flex flex-wrap-reverse flex-row-reverse" ref={flowerSectionRef}>
+      <div
+        className={`flex ${load && 'flex-wrap-reverse flex-row-reverse'}`}
+        ref={flowerSectionRef}
+      >
         {load ? (
           new Array(nFlowers)
             .fill(0)
@@ -58,7 +61,17 @@ const Flowers: FC<FlowersProps> = ({ daimoku }) => {
               />
             ))
         ) : (
-          <div></div>
+          <div className="mx-auto my-10">
+            Caricamento fiori...{' '}
+            <Image
+              src={FlowersIMG}
+              width={40}
+              height={40}
+              alt="1000 daimoku"
+              className="animate-ping inline-block"
+              style={{ animationDuration: getRandomAnimationDuration() }}
+            />
+          </div>
         )}
       </div>
     </div>
