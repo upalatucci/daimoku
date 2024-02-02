@@ -1,20 +1,13 @@
 import { kv } from '@vercel/kv';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import dynamic from 'next/dynamic';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import { FC, Suspense, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import Count from 'src/components/Count';
 import Flowers from 'src/components/Flowers';
 import AddDaimoku from 'src/components/Modals/AddDaimoku';
 import FlowersIMG from '../assets/flower.png';
 
-const AnimatedNumbers = dynamic(() => import('react-animated-numbers'), {
-  ssr: false,
-  loading: () => (
-    <span className="h-12 w-40 animate-pulse rounded-full from-magenta to-[#ac2aed] bg-gradient-to-r" />
-  ),
-});
-
-const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ initialDaimoku }) => {
+const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ initialDaimoku }) => {
   const [daimoku, setDaimoku] = useState(initialDaimoku);
 
   useEffect(() => {
@@ -80,19 +73,7 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
             </em>
             <div>
               <h2 className="flex  items-center justify-center gap-2 font-bold text-4xl md:text-5xl xl:text-6xl my-10 from-magenta to-[#ac2aed] bg-gradient-to-r  text-transparent bg-clip-text">
-                <Suspense fallback={<>{daimoku}</>}>
-                  <AnimatedNumbers
-                    includeComma
-                    transitions={() => ({
-                      type: 'spring',
-                      duration: 0.5,
-                    })}
-                    animateToNumber={daimoku}
-                    fontStyle={{
-                      color: '#ED1E79',
-                    }}
-                  />
-                </Suspense>
+                <Count daimoku={daimoku} />
                 Daimoku
               </h2>
             </div>
@@ -115,12 +96,13 @@ const Home: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ init
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const initialDaimoku = (await kv.get<number>('daimoku')) || 0;
 
   return {
     props: {
       initialDaimoku,
     },
+    revalidate: 60,
   };
 };
